@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0b0e">
+  <meta name="description" content="Pre-registro oficial para RUTA 30: Chiva & Remate. 30 de diciembre. Solo 40 cupos.">
+  <title>RUTA 30 | Chiva & Remate</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@600;700&display=swap');
+
+    :root {
+      --bg: #0b0b0e;
+      --panel: rgba(18, 18, 25, .78);
+      --panel-strong: #121219;
+      --text: #f7f7fb;
+      --muted: #aaaaba;
+      --pink: #ff007f;
+      --blue: #00f0ff;
+      --danger: #ff477e;
+      --success: #57f287;
+      --border: rgba(255,255,255,.1);
+      --shadow-pink: 0 0 18px rgba(255,0,127,.45), 0 0 55px rgba(255,0,127,.18);
+      --shadow-blue: 0 0 18px rgba(0,240,255,.35), 0 0 55px rgba(0,240,255,.14);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 12%, rgba(255,0,127,.14), transparent 25rem),
+        radial-gradient(circle at 88% 32%, rgba(0,240,255,.12), transparent 28rem),
+        var(--bg);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .22;
+      background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 34px 34px;
+      mask-image: linear-gradient(to bottom, black, transparent 85%);
+      z-index: -1;
+    }
+
+    a { color: inherit; }
+    button, input { font: inherit; }
+    .container { width: min(1120px, calc(100% - 32px)); margin-inline: auto; }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 0;
+    }
+
+    .brand {
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 800;
+      letter-spacing: -.04em;
+      font-size: clamp(1.15rem, 3vw, 1.5rem);
+    }
+    .brand span { color: var(--pink); text-shadow: 0 0 18px rgba(255,0,127,.8); }
+
+    .date-pill, .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(0,240,255,.32);
+      background: rgba(0,240,255,.07);
+      box-shadow: inset 0 0 20px rgba(0,240,255,.05);
+      border-radius: 999px;
+      color: #c9fbff;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 9px 13px;
+    }
+
+    .date-pill::before, .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 0 12px var(--blue);
+    }
+
+    .hero {
+      min-height: calc(100vh - 82px);
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      align-items: center;
+      gap: clamp(32px, 6vw, 84px);
+      padding: 56px 0 80px;
+    }
+
+    .hero-copy { position: relative; }
+    .hero h1 {
+      margin: 22px 0 20px;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 800;
+      font-size: clamp(3.25rem, 7.3vw, 6.7rem);
+      line-height: .92;
+      letter-spacing: -.07em;
+      text-wrap: balance;
+    }
+    .hero h1 em {
+      display: block;
+      color: var(--pink);
+      font-style: normal;
+      text-shadow: 0 0 8px rgba(255,0,127,.7), 0 0 35px rgba(255,0,127,.5), 0 0 80px rgba(255,0,127,.25);
+    }
+
+    .lead {
+      max-width: 650px;
+      color: #d7d7e2;
+      font-size: clamp(1.05rem, 2vw, 1.22rem);
+      line-height: 1.7;
+      margin: 0 0 28px;
+    }
+
+    .urgency {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: fit-content;
+      padding: 13px 16px;
+      border: 1px solid rgba(255,0,127,.28);
+      border-radius: 16px;
+      background: rgba(255,0,127,.07);
+      box-shadow: var(--shadow-pink);
+    }
+    .pulse {
+      width: 10px;
+      height: 10px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: var(--pink);
+      box-shadow: 0 0 0 rgba(255,0,127,.7);
+      animation: pulse 1.7s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255,0,127,.7); }
+      70% { box-shadow: 0 0 0 12px rgba(255,0,127,0); }
+      100% { box-shadow: 0 0 0 0 rgba(255,0,127,0); }
+    }
+    @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; animation: none !important; transition: none !important; } }
+
+    .urgency strong { color: #fff; }
+    .urgency small { color: #d6a7c1; display: block; margin-top: 2px; }
+
+    .hero-card {
+      position: relative;
+      padding: 2px;
+      border-radius: 28px;
+      background: linear-gradient(145deg, rgba(255,0,127,.85), rgba(255,255,255,.08) 44%, rgba(0,240,255,.78));
+      box-shadow: 0 30px 90px rgba(0,0,0,.55), var(--shadow-blue);
+      isolation: isolate;
+    }
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      inset: -45px -45px auto auto;
+      border-radius: 50%;
+      background: var(--blue);
+      filter: blur(80px);
+      opacity: .23;
+      z-index: -1;
+    }
+    .card-inner {
+      background: linear-gradient(160deg, rgba(20,20,29,.98), rgba(10,10,15,.95));
+      border-radius: 26px;
+      padding: clamp(24px, 5vw, 38px);
+    }
+    .card-kicker { color: var(--blue); font-size: .78rem; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
+    .hero-card h2 { font-family: "Space Grotesk"; font-size: clamp(1.8rem, 4vw, 2.7rem); line-height: 1.06; margin: 10px 0 12px; }
+    .hero-card p { color: var(--muted); line-height: 1.65; margin: 0 0 22px; }
+
+    .capacity { display: flex; justify-content: space-between; align-items: end; margin-bottom: 10px; }
+    .capacity b { font-size: 2.3rem; color: var(--pink); text-shadow: 0 0 18px rgba(255,0,127,.6); }
+    .capacity span { color: var(--muted); font-size: .86rem; }
+    .progress { height: 9px; overflow: hidden; border-radius: 999px; background: #24242d; }
+    .progress > span {
+      display: block;
+      width: 82.5%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue), var(--pink));
+      box-shadow: 0 0 16px var(--pink);
+    }
+    .microcopy { margin-top: 13px !important; font-size: .78rem; }
+
+    .section { padding: 88px 0; }
+    .section-heading { text-align: center; max-width: 750px; margin: 0 auto 38px; }
+    .section-heading .eyebrow { margin-bottom: 16px; }
+    .section-heading h2 { font-family: "Space Grotesk"; font-size: clamp(2.1rem, 5vw, 4rem); letter-spacing: -.055em; line-height: 1; margin: 0 0 14px; }
+    .section-heading p { color: var(--muted); line-height: 1.7; margin: 0; }
+
+    .experience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .experience-card {
+      min-height: 220px;
+      padding: 26px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: linear-gradient(160deg, rgba(255,255,255,.055), rgba(255,255,255,.018));
+      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    }
+    .experience-card:hover { transform: translateY(-6px); border-color: rgba(0,240,255,.35); box-shadow: var(--shadow-blue); }
+    .experience-card:nth-child(2):hover { border-color: rgba(255,0,127,.4); box-shadow: var(--shadow-pink); }
+    .icon { font-size: 2.1rem; display: block; margin-bottom: 28px; filter: drop-shadow(0 0 12px rgba(255,255,255,.2)); }
+    .experience-card h3 { font-size: 1.35rem; margin: 0 0 9px; }
+    .experience-card p { color: var(--muted); line-height: 1.6; margin: 0; }
+
+    .register-wrap {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 34px;
+      align-items: stretch;
+      padding: clamp(24px, 5vw, 48px);
+      border: 1px solid rgba(255,0,127,.22);
+      background: linear-gradient(145deg, rgba(255,0,127,.075), rgba(20,20,28,.88) 45%, rgba(0,240,255,.055));
+      border-radius: 30px;
+      box-shadow: 0 32px 100px rgba(0,0,0,.45), inset 0 0 70px rgba(255,255,255,.02);
+    }
+    .register-copy { display: flex; flex-direction: column; justify-content: center; }
+    .register-copy h2 { font-family: "Space Grotesk"; font-size: clamp(2.3rem, 5vw, 4rem); line-height: 1; letter-spacing: -.055em; margin: 18px 0; }
+    .register-copy p { color: var(--muted); line-height: 1.7; }
+    .trust-list { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 12px; }
+    .trust-list li { display: flex; gap: 10px; color: #d8d8e2; }
+    .trust-list li::before { content: "✓"; color: var(--blue); font-weight: 900; }
+
+    form {
+      padding: clamp(22px, 4vw, 34px);
+      border-radius: 23px;
+      border: 1px solid rgba(255,255,255,.09);
+      background: rgba(8,8,12,.72);
+      box-shadow: 0 24px 55px rgba(0,0,0,.34);
+    }
+    .field { margin-bottom: 18px; }
+    label { display: block; margin-bottom: 8px; font-size: .88rem; font-weight: 800; color: #e9e9f2; }
+    input {
+      width: 100%;
+      color: #fff;
+      background: #15151d;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 13px;
+      padding: 15px 16px;
+      outline: none;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    input::placeholder { color: #747482; }
+    input:focus { border-color: var(--blue); box-shadow: 0 0 0 4px rgba(0,240,255,.1), 0 0 22px rgba(0,240,255,.1); }
+    input[aria-invalid="true"] { border-color: var(--danger); box-shadow: 0 0 0 4px rgba(255,71,126,.1); }
+    .error { min-height: 19px; margin-top: 7px; color: #ff8bab; font-size: .78rem; }
+
+    .cta {
+      width: 100%;
+      border: 0;
+      border-radius: 14px;
+      padding: 17px 18px;
+      color: #09090d;
+      background: linear-gradient(100deg, var(--blue), #86f9ff 30%, #ff69b4 70%, var(--pink));
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(0,240,255,.28), 0 0 34px rgba(255,0,127,.28);
+      transition: transform .2s ease, filter .2s ease, box-shadow .2s ease;
+    }
+    .cta:hover { transform: translateY(-2px) scale(1.01); filter: brightness(1.08); box-shadow: 0 0 28px rgba(0,240,255,.42), 0 0 48px rgba(255,0,127,.4); }
+    .cta:active { transform: translateY(0); }
+    .cta:focus-visible, a:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+    .privacy { text-align: center; color: #777785; font-size: .72rem; line-height: 1.5; margin: 13px 0 0; }
+    .form-status { display: none; margin: 0 0 16px; padding: 12px 14px; border-radius: 12px; font-size: .85rem; line-height: 1.45; }
+    .form-status.error-box { display: block; color: #ffd2df; background: rgba(255,71,126,.11); border: 1px solid rgba(255,71,126,.25); }
+
+    footer { padding: 28px 0 45px; text-align: center; color: #6f6f7d; font-size: .8rem; }
+    footer strong { color: #aaaaba; }
+
+    @media (max-width: 880px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 38px; }
+      .hero-copy { text-align: center; }
+      .lead { margin-inline: auto; }
+      .urgency { margin-inline: auto; text-align: left; }
+      .hero-card { width: min(580px, 100%); margin-inline: auto; }
+      .register-wrap { grid-template-columns: 1fr; }
+      .register-copy { text-align: center; }
+      .trust-list { width: fit-content; margin-inline: auto; text-align: left; }
+    }
+
+    @media (max-width: 680px) {
+      .container { width: min(100% - 24px, 1120px); }
+      .topbar { padding-top: 14px; }
+      .date-pill { font-size: .67rem; padding: 8px 10px; }
+      .hero { padding: 34px 0 58px; }
+      .hero h1 { font-size: clamp(3rem, 15vw, 4.7rem); }
+      .lead { font-size: 1rem; line-height: 1.62; }
+      .experience-grid { grid-template-columns: 1fr; }
+      .experience-card { min-height: auto; }
+      .section { padding: 65px 0; }
+      .register-wrap { padding: 14px; border-radius: 24px; }
+      .register-copy { padding: 18px 10px 4px; }
+      form { border-radius: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="container topbar" aria-label="Encabezado principal">
+    <div class="brand">RUTA <span>30</span></div>
+    <div class="date-pill">30 de diciembre</div>
+  </header>
+
+  <main>
+    <section class="container hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <span class="eyebrow">El último plan del año</span>
+        <h1 id="hero-title">¿Estás listo para el último <em>remate del año?</em></h1>
+        <p class="lead">Chiva rumbera, ruta exclusiva y una finca privada hasta el amanecer. <strong>Solo para los que saben vivir.</strong></p>
+        <div class="urgency" role="status" aria-live="polite">
+          <span class="pulse" aria-hidden="true"></span>
+          <div><strong>¡Solo 40 cupos disponibles!</strong><small>Pre-regístrate antes de que se cierre la lista.</small></div>
+        </div>
+      </div>
+
+      <aside class="hero-card" aria-label="Disponibilidad del evento">
+        <div class="card-inner">
+          <span class="card-kicker">Acceso hiper-limitado</span>
+          <h2>Una noche.<br>Una ruta.<br>Un remate épico.</h2>
+          <p>El 30 de diciembre la ciudad se queda corta. Subimos el volumen, prendemos la ruta y cerramos el año como se debe.</p>
+          <div class="capacity"><b>40</b><span>cupos exclusivos<br>para toda la experiencia</span></div>
+          
+          <p class="microcopy">* La disponibilidad se confirma directamente después del pre-registro.</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section" aria-labelledby="experience-title">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">La experiencia</span>
+          <h2 id="experience-title">De la primera canción al amanecer.</h2>
+          <p>No es otra fiesta. Es el recorrido que todos van a querer haber vivido.</p>
+        </div>
+        <div class="experience-grid">
+          <article class="experience-card">
+            <span class="icon" aria-hidden="true">🚌</span>
+            <h3>Ruta Nocturna</h3>
+            <p>Chiva full sonido, energía arriba y una ruta diseñada para prender la noche desde el primer minuto.</p>
+          </article>
+          <article class="experience-card">
+            <span class="icon" aria-hidden="true">🌴</span>
+            <h3>Remate VIP</h3>
+            <p>Finca privada, piscina y ambiente exclusivo para llevar la celebración hasta que salga el sol.</p>
+          </article>
+          <article class="experience-card">
+            <span class="icon" aria-hidden="true">🍹</span>
+            <h3>Cero Filas</h3>
+            <p>Sin perder tiempo. Acceso organizado para que tu única preocupación sea disfrutar el mejor cierre de año.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="registro" class="section" aria-labelledby="register-title">
+      <div class="container register-wrap">
+        <div class="register-copy">
+          <span class="eyebrow">Pre-registro VIP</span>
+          <h2 id="register-title">Tu lugar en la ruta empieza aquí.</h2>
+          <p>Completa tus datos para entrar a la lista prioritaria. Te contactaremos para confirmar disponibilidad y los siguientes pasos.</p>
+          <ul class="trust-list">
+            <li>Solo 40 cupos en total</li>
+            
+            <li>Confirmación directa por el equipo organizador</li>
+          </ul>
+        </div>
+
+        <form id="vipForm" action="https://formspree.io/f/mkjjpnbw" method="POST" novalidate>
+          <input type="hidden" name="evento" value="RUTA 30: Chiva & Remate - 30 de diciembre">
+          <div id="formStatus" class="form-status" role="alert" aria-live="assertive"></div>
+
+          <div class="field">
+            <label for="nombre">Nombre completo</label>
+            <input id="nombre" name="nombre_completo" type="text" autocomplete="name" placeholder="¿Cómo te llamas?" minlength="3" maxlength="80" required>
+            <div id="nombreError" class="error" aria-live="polite"></div>
+          </div>
+
+          <div class="field">
+            <label for="edad">Edad</label>
+            <input id="edad" name="edad" type="number" inputmode="numeric" placeholder="¿Cuántos años tienes?" min="1" max="120" required>
+            <div id="edadError" class="error" aria-live="polite"></div>
+          </div>
+
+          <div class="field">
+            <label for="contacto">Contacto (WhatsApp o correo)</label>
+            <input id="contacto" name="contacto" type="text" autocomplete="email" placeholder="Ej. 300 123 4567 o tú@correo.com" minlength="7" maxlength="100" required>
+            <div id="contactoError" class="error" aria-live="polite"></div>
+          </div>
+
+          <button class="cta" type="submit">¡Asegurar mi cupo VIP ahora!</button>
+          <p class="privacy">Al registrarte aceptas ser contactado únicamente con información relacionada con el evento. El pre-registro no garantiza el cupo hasta recibir confirmación.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container"><strong>RUTA 30: Chiva & Remate</strong> · 30 de diciembre · Cupos limitados.</footer>
+
+  <script>
+    (() => {
+
+      const form = document.getElementById('vipForm');
+      const nombre = document.getElementById('nombre');
+      const edad = document.getElementById('edad');
+      const contacto = document.getElementById('contacto');
+      const status = document.getElementById('formStatus');
+
+      const setError = (input, message) => {
+        input.setAttribute('aria-invalid', message ? 'true' : 'false');
+        document.getElementById(input.id + 'Error').textContent = message;
+      };
+
+      const validateName = () => {
+        const valid = nombre.value.trim().length >= 3;
+        setError(nombre, valid ? '' : 'Cuéntanos tu nombre completo para reservar tu lugar.');
+        return valid;
+      };
+
+      const validateAge = () => {
+        const value = Number(edad.value);
+        let message = '';
+        if (!edad.value) message = 'Cuéntanos tu edad.';
+        else if (!Number.isInteger(value) || value < 1) message = 'Revisa la edad ingresada.';
+        else if (value > 120) message = 'Revisa la edad ingresada.';
+        setError(edad, message);
+        return !message;
+      };
+
+      const validateContact = () => {
+        const value = contacto.value.trim();
+        const email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const phone = /^\+?[0-9\s()-]{7,20}$/;
+        const valid = email.test(value) || phone.test(value);
+        setError(contacto, valid ? '' : 'Ingresa un WhatsApp válido o un correo con formato correcto.');
+        return valid;
+      };
+
+      nombre.addEventListener('blur', validateName);
+      edad.addEventListener('blur', validateAge);
+      contacto.addEventListener('blur', validateContact);
+      [nombre, edad, contacto].forEach(input => input.addEventListener('input', () => {
+        if (input.getAttribute('aria-invalid') === 'true') {
+          if (input === nombre) validateName();
+          if (input === edad) validateAge();
+          if (input === contacto) validateContact();
+        }
+      }));
+
+      form.addEventListener('submit', (event) => {
+        status.className = 'form-status';
+        status.textContent = '';
+        const valid = validateName() & validateAge() & validateContact();
+        if (!valid) {
+          event.preventDefault();
+          status.className = 'form-status error-box';
+          status.textContent = 'La ruta te espera, pero primero revisa los campos marcados.';
+          const firstInvalid = form.querySelector('[aria-invalid="true"]');
+          if (firstInvalid) firstInvalid.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
